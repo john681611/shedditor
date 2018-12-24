@@ -21,11 +21,11 @@ export default {
         },
         saveFile() {
             console.log(this.content);
-            // const data = new Uint8Array(Buffer.from(this.content));
-            // fs.writeFile(this.originalFile, data, (err) => {
-            //     if (err) {throw err;}
-            //     console.log('The file has been saved!');
-            // });
+            const data = new Uint8Array(Buffer.from(this.content));
+            fs.writeFile(this.originalFile, data, (err) => {
+                if (err) {throw err;}
+                console.log('The file has been saved!');
+            });
         }
     },
     watch: {

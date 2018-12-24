@@ -11,11 +11,17 @@ const walkSync = (dir, fileList) =>  {
             name: file,
             children:[]
         };
-        if (fs.statSync(filePath).isDirectory()) {
-            fileObj.children = walkSync(filePath, []);
-            fileObj.folder = true;
+        try {
+            const stats =  fs.statSync(filePath);
+            if (stats.isDirectory()) {
+                fileObj.children = walkSync(filePath, []);
+                fileObj.folder = true;
+            }
+            fileList.push(fileObj);
+        } catch (e) {
+            console.log(e);
         }
-        fileList.push(fileObj);
+
     });
     return fileList;
 };
