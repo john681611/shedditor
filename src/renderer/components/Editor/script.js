@@ -8,7 +8,9 @@ export default {
     props:['openFile'],
     data() {
         return {
-            content:'EMPTY'
+            content: null,
+            fileName: null,
+            active: null
         };
     },
     methods: {
@@ -16,13 +18,23 @@ export default {
             let type =  file.split('.').pop();
             type  = ['ejs', 'vue'].indexOf(type) !== -1 ? 'html': type;
             return type;
+        },
+        saveFile() {
+            console.log(this.content);
+            // const data = new Uint8Array(Buffer.from(this.content));
+            // fs.writeFile(this.originalFile, data, (err) => {
+            //     if (err) {throw err;}
+            //     console.log('The file has been saved!');
+            // });
         }
     },
     watch: {
         openFile: {
             immediate: true,
             handler(newFile) {
+                this.originalFile = newFile; 
                 this.content = fs.readFileSync(newFile, 'utf8');
+                this.fileName = newFile.split('/').pop();
             }
         }
     }

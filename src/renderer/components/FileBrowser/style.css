@@ -2,12 +2,6 @@ button + .v-treeview-node__label {
   display: none;
 }
 
-.v-treeview-node > .v-treeview-node__root >.v-treeview-node__content > .v-btn {
-  box-shadow: none;
-  background-color: white;
-  text-transform: none;
-}
-
  .v-treeview-node,
  .v_treeview-node > .v-treeview-node--leaf {
   margin-left: 10px;
