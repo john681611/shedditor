@@ -22,7 +22,7 @@ const walkSync = (dir, fileList) =>  {
 
 const setFolder = (filePath, state) => {
     state.sourcePath = filePath;
-    state.fileList = walkSync(filePath, []);
+    state.fileList = [{name: filePath.split('/').pop(), folder: true, children:walkSync(filePath, [])}];
 };
 
 export default {
@@ -44,7 +44,6 @@ export default {
             });
         },
         openFile(fileName) {
-            console.log(fileName);
             this.$emit('open-file', path.join(this.sourcePath, fileName));
         }
     }

@@ -13,8 +13,9 @@ export default {
     },
     methods: {
         getFileType(file) {
-            console.log(file.split('.').pop());
-            return file.split('.').pop();
+            let type =  file.split('.').pop();
+            type  = ['ejs', 'vue'].indexOf(type) !== -1 ? 'html': type;
+            return type;
         }
     },
     watch: {

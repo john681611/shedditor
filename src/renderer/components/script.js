@@ -8,10 +8,5 @@ export default {
         };
     },
     name: 'landing-page',
-    components: { FileBrowser, Editor },
-    methods: {
-        open (link) {
-            this.$electron.shell.openExternal(link);
-        }
-    }
+    components: { FileBrowser, Editor }
 };
