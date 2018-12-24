@@ -1,5 +1,5 @@
 {
-  "name": "launcher-vue-electron",
+  "name": "shedditor",
   "version": "0.0.1",
   "author": "john681611 <john.harvey@marks-and-spencer.com>",
   "description": "An electron-vue project",
@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "launcher-vue-electron",
+    "productName": "shedditor",
     "appId": "com.example.yourapp",
     "directories": {
       "output": "build"

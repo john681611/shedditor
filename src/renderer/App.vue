@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'launcher-vue-electron'
+    name: 'Shedditor'
   }
 </script>
 

@@ -1,4 +1,4 @@
-# launcher-vue-electron
+# shedditor
 
 > An electron-vue project
 
