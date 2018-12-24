@@ -2,9 +2,27 @@ const {dialog} = require('electron').remote;
 const fs = require('fs');
 const path = require('path');
 
+
+const walkSync = (dir, fileList) =>  {
+    const files = fs.readdirSync(dir);
+    files.forEach(function(file) {
+        const filePath = path.join(dir, file);
+        const fileObj = {
+            name: file,
+            children:[]
+        };
+        if (fs.statSync(filePath).isDirectory()) {
+            fileObj.children = walkSync(filePath, []);
+            fileObj.folder = true;
+        }
+        fileList.push(fileObj);
+    });
+    return fileList;
+};
+
 const setFolder = (filePath, state) => {
     state.sourcePath = filePath;
-    state.fileList = fs.readdirSync(filePath);
+    state.fileList = walkSync(filePath, []);
 };
 
 export default {
@@ -25,18 +43,8 @@ export default {
                 setFolder(folderPaths[0], this);
             });
         },
-        selectFolder(folderName) {
-
-            setFolder(path.join(this.sourcePath, folderName), this);
-        },
-        goUp(){
-            setFolder(this.sourcePath.substring(0, this.sourcePath.lastIndexOf('/')), this);
-        },
-        isDir(folderName) {
-            const stats = fs.statSync(path.join(this.sourcePath, folderName));
-            return stats.isDirectory();
-        },
         openFile(fileName) {
+            console.log(fileName);
             this.$emit('open-file', path.join(this.sourcePath, fileName));
         }
     }
