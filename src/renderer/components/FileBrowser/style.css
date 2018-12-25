@@ -6,3 +6,11 @@ button + .v-treeview-node__label {
  .v_treeview-node > .v-treeview-node--leaf {
   margin-left: 10px;
 }
+
+.file-button {
+  text-transform: none;
+}
+
+.tree {
+  overflow:scroll;
+}

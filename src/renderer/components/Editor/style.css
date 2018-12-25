@@ -6,3 +6,9 @@
 code {
     width: 100%;
 }
+
+.center {
+    margin: auto;
+    width: 95%;
+    text-align: center;
+}

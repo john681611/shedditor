@@ -11,7 +11,13 @@
       <file-browser v-on:open-file="openFile = $event"></file-browser>
     </v-navigation-drawer>
     <main>
-      <editor v-bind:open-file='openFile'></editor>
+      <editor v-if='openFile'  v-bind:open-file='openFile' v-on:open-file="openFile = $event"></editor>
+      <dir v-else class='center'>
+        <h1>Looks like you have nothing open</h1>
+        <v-btn v-on:click.stop="drawer = !drawer">TAKE ME TO MY FILES DAMN IT!</v-btn>
+        <p>Can't think of anything? Here is some music to listen to while you decide.</p>
+        <iframe class='videoContainer' width="560" height="315" src="https://www.youtube.com/embed/-b5X69vREAg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </dir>
     </main>
   </div>
 </template>
