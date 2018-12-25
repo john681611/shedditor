@@ -8,7 +8,7 @@ export default new Router({
         {
             path: '/',
             name: 'landing-page',
-            component: require('@/components/markup').default
+            component: require('@/components/index/markup').default
         },
         {
             path: '*',

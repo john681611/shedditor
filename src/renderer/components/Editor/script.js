@@ -10,7 +10,6 @@ export default {
         return {
             originalFile:null,
             content: null,
-            fileName: null,
             active: null
         };
     },
@@ -40,7 +39,6 @@ export default {
             handler(newFile) {
                 this.originalFile = newFile;
                 this.content = fs.readFileSync(newFile, 'utf8');
-                this.fileName = newFile.split('/').pop();
             }
         }
     }
