@@ -9,6 +9,7 @@ const walkSync = (dir, fileList) =>  {
         const filePath = path.join(dir, file);
         const fileObj = {
             name: file,
+            filePath, 
             children:[]
         };
         try {
@@ -27,7 +28,6 @@ const walkSync = (dir, fileList) =>  {
 };
 
 const setFolder = (filePath, state) => {
-    state.sourcePath = filePath;
     state.fileList = [{name: filePath.split('/').pop(), folder: true, children:walkSync(filePath, [])}];
 };
 
@@ -50,7 +50,7 @@ export default {
             });
         },
         openFile(fileName) {
-            this.$emit('open-file', path.join(this.sourcePath, fileName));
+            this.$emit('open-file', fileName);
         }
     }
 };

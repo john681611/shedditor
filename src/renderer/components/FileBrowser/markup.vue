@@ -13,7 +13,7 @@
       <v-icon v-if='item.folder'>
         {{ open ? 'folder_open' : 'folder' }}
       </v-icon>
-      <v-btn v-else flat v-on:click='openFile(item.name)' class='file-button'>
+      <v-btn v-else flat v-on:click='openFile(item.filePath)' class='file-button'>
         <v-icon>
           description
         </v-icon>
