@@ -1,10 +1,9 @@
-const PrismEditor = require('vue-prism-editor');
-import 'prismjs';
-import 'prismjs/themes/prism.css';
-import 'vue-prism-editor/dist/VuePrismEditor.css'; // import the styles
+
+import MonacoEditor from '../monacoEditor/script';
+import fileMapping from './fileMapping';
 const fs = require('fs');
 export default {
-    components: {PrismEditor},
+    components: {MonacoEditor},
     props:['openFile'],
     data() {
         return {
@@ -15,9 +14,7 @@ export default {
     },
     methods: {
         getFileType(file) {
-            let type =  file.split('.').pop();
-            type  = ['ejs', 'vue'].indexOf(type) !== -1 ? 'html': type;
-            return type;
+            return fileMapping[file.split('.').pop()];
         },
         saveFile() {
             const data = new Uint8Array(Buffer.from(this.content));

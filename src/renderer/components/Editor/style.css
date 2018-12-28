@@ -12,3 +12,12 @@ code {
     width: 95%;
     text-align: center;
 }
+
+.editor {
+  width: 600px;
+  height: 800px;
+}
+
+.monaco-workbench>.editor>.content .editor-container {
+    height: calc(100% - 35px);
+  }
