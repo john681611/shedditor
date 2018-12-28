@@ -13,12 +13,19 @@
       </v-tabs>
     </v-toolbar>
     <v-navigation-drawer v-model="drawer" temporary absolute dark>
-      <file-browser v-on:open-file="openFile($event)"></file-browser>
+      <file-browser v-on:open-file="openFile($event)" v-on:notify="notify"></file-browser>
     </v-navigation-drawer>
     <main>
+    <v-snackbar v-model="showNote" :bottom="true" multi-line auto-height :timeout="0">
+      <v-alert :value="showNote" :type="note.type">
+        {{note.message}}
+      <v-btn flat v-on:click="showNote = false" class="close-note"><v-icon>close</v-icon></v-btn>
+    </v-alert>
+      </v-btn>
+    </v-snackbar>
     <v-tabs-items v-if='files.length' v-model="active">
           <v-tab-item v-for="file in files">
-            <editor :open-file='file.path'></editor>
+            <editor :open-file='file.path' v-on:notify="notify"></editor>
           </v-tab-item>
         </v-tabs-items>
       <dir v-else class='center'>

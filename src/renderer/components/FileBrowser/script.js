@@ -3,24 +3,25 @@ const fs = require('fs');
 const path = require('path');
 
 
-const walkSync = (dir, fileList) =>  {
+const walkSync = (dir, fileList, state) =>  {
     const files = fs.readdirSync(dir);
     files.forEach(function(file) {
         const filePath = path.join(dir, file);
         const fileObj = {
             name: file,
-            filePath, 
+            filePath,
             children:[]
         };
         try {
             const stats =  fs.statSync(filePath);
             if (stats.isDirectory()) {
-                fileObj.children = walkSync(filePath, []);
+                fileObj.children = walkSync(filePath, [], state);
                 fileObj.folder = true;
             }
             fileList.push(fileObj);
         } catch (e) {
-            console.log(e);
+            console.error(e);
+            state.$emit('notify', {message:'Tree build failed', type:'error'});
         }
 
     });
@@ -28,7 +29,7 @@ const walkSync = (dir, fileList) =>  {
 };
 
 const setFolder = (filePath, state) => {
-    state.fileList = [{name: filePath.split('/').pop(), folder: true, children:walkSync(filePath, [])}];
+    state.fileList = [{name: filePath.split('/').pop(), folder: true, children:walkSync(filePath, [], state)}];
 };
 
 export default {

@@ -19,12 +19,16 @@ export default {
         saveFile() {
             const data = new Uint8Array(Buffer.from(this.content));
             fs.writeFile(this.originalFile, data, (err) => {
-                if (err) {throw err;}
-                console.log('The file has been saved!');
+                if (err) {
+                    console.log(err);
+                    this.$emit('notify', {message:'Save Failed', type:'error'});
+                }
+                this.$emit('notify', {message:`Saved ${this.originalFile}`, type:'success'});
             });
         },
         refeshFile() {
             this.content = fs.readFileSync(this.originalFile, 'utf8');
+            this.$emit('notify', {message:`Refreshed: ${this.originalFile}`, type:'success'});
         },
         close() {
             this.$emit('open-file', null);

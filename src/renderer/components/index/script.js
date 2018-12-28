@@ -5,7 +5,9 @@ export default {
         return {
             active: null,
             drawer: null,
-            files:[]
+            files:[],
+            note: {type:'info', message:''},
+            showNote: false
         };
     },
     name: 'landing-page',
@@ -20,6 +22,10 @@ export default {
                 this.files.push(fileObj);
                 this.active = this.files.length -1;
             }
+        },
+        notify(notification) {
+            this.note = notification;
+            this.showNote = true;
         }
     }
 };

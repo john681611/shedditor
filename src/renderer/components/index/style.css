@@ -24,3 +24,10 @@ main {
   height: 20px;
   -webkit-app-region: drag;
 }
+
+.close-note, .close-note:hover {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
