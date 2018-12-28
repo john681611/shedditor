@@ -16,7 +16,7 @@
       <file-browser v-on:open-file="openFile($event)" v-on:notify="notify"></file-browser>
     </v-navigation-drawer>
     <main>
-    <v-snackbar v-model="showNote" :bottom="true" multi-line auto-height :timeout="0">
+    <v-snackbar v-model="showNote" :bottom="true" multi-line auto-height :timeout="6000">
       <v-alert :value="showNote" :type="note.type">
         {{note.message}}
       <v-btn flat v-on:click="showNote = false" class="close-note"><v-icon>close</v-icon></v-btn>
