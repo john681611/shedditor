@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
-const MonocoEditorPlugin = require('monaco-editor-webpack-plugin')
+// const MonocoEditorPlugin = require('monaco-editor-webpack-plugin')
 
 /**
  * List of node_modules to include in webpack bundle
@@ -137,7 +137,7 @@ let rendererConfig = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new MonocoEditorPlugin()
+    // new MonocoEditorPlugin()
   ],
   output: {
     filename: '[name].js',
