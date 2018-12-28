@@ -7,7 +7,8 @@
         <monaco-editor
     class="editor"
     v-model="content"
-    :language="getFileType(openFile)">
+    :language="getFileType(openFile)"
+    theme='vs-dark'>
   </monaco-editor>
     </dir>
 </template>

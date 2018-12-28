@@ -1,5 +1,5 @@
 
-import MonacoEditor from '../monacoEditor/script';
+import MonacoEditor from './monaco';
 import fileMapping from './fileMapping';
 const fs = require('fs');
 export default {

@@ -8,7 +8,7 @@
           <v-btn  flat v-on:click="openFolder()" open-on-click class='file-button'><v-icon>create_new_folder</v-icon>New</v-btn>
         </v-flex>
      </v-layout>
-    <v-treeview :items="fileList" expand-icon='' open-on-click class='tree'>
+    <v-treeview dark :items="fileList" expand-icon='' open-on-click class='tree'>
     <template slot="prepend" slot-scope="{ item, open, leaf }" >
       <v-icon v-if='item.folder'>
         {{ open ? 'folder_open' : 'folder' }}

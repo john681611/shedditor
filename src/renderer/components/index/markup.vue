@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <v-toolbar absolute tabs>
+    <v-toolbar absolute tabs dark>
       <v-icon v-on:click.stop="drawer = !drawer" >folder</v-icon>
       <v-toolbar-title>Shedditor</v-toolbar-title>
       <p style='margin: 0 20px'>
@@ -12,7 +12,7 @@
         </v-tab>
       </v-tabs>
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" temporary absolute>
+    <v-navigation-drawer v-model="drawer" temporary absolute dark>
       <file-browser v-on:open-file="openFile($event)"></file-browser>
     </v-navigation-drawer>
     <main>
