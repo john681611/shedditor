@@ -7,7 +7,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;Finally a editor more awkward than vim\s
       </p>
       <v-tabs v-if='files.length' v-model="active" slot="extension" centered show-arrows>
-        <v-tab v-for="file in files" ripple>
+        <v-tab v-for="file in files" :key="file" ripple>
           {{file.name}} <v-icon v-on:click='files.splice(files.indexOf(file),1)'>close</v-icon>
         </v-tab>
       </v-tabs>
@@ -24,7 +24,7 @@
       </v-btn>
     </v-snackbar>
     <v-tabs-items v-if='files.length' v-model="active">
-          <v-tab-item v-for="file in files">
+          <v-tab-item v-for="file in files" :key="file">
             <editor :open-file='file.path' v-on:notify="notify"></editor>
           </v-tab-item>
         </v-tabs-items>

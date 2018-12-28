@@ -3,5 +3,6 @@ export default {
     html: 'html',
     vue: 'handlebars',
     hbs: 'handlebars',
-    css: 'css'
+    css: 'css',
+    ejs: 'html'
 };

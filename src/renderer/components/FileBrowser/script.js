@@ -14,7 +14,7 @@ const walkSync = (dir, fileList, state) =>  {
         };
         try {
             const stats =  fs.statSync(filePath);
-            if (stats.isDirectory()) {
+            if (stats.isDirectory() && !filePath.includes('node_modules')) {
                 fileObj.children = walkSync(filePath, [], state);
                 fileObj.folder = true;
             }
