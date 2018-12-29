@@ -1,7 +1,7 @@
 
 import MonacoEditor from './monaco';
 import fileMapping from './fileMapping';
-const fs = require('fs');
+const fs = require('fs-extra');
 export default {
     components: {MonacoEditor},
     props:['openFile'],
@@ -26,8 +26,8 @@ export default {
                 this.$emit('notify', {message:`Saved ${this.originalFile}`, type:'success'});
             });
         },
-        refeshFile() {
-            this.content = fs.readFileSync(this.originalFile, 'utf8');
+        async refeshFile() {
+            this.content = await fs.readFile(this.originalFile, 'utf8');
             this.$emit('notify', {message:`Refreshed: ${this.originalFile}`, type:'success'});
         },
         close() {
@@ -37,9 +37,9 @@ export default {
     watch: {
         openFile: {
             immediate: true,
-            handler(newFile) {
+            async handler(newFile) {
                 this.originalFile = newFile;
-                this.content = fs.readFileSync(newFile, 'utf8');
+                this.content = await fs.readFileSync(newFile, 'utf8');
             }
         }
     }

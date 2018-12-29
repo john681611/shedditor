@@ -1,11 +1,11 @@
 const {dialog} = require('electron').remote;
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 
-const walkSync = (dir, fileList, state) =>  {
-    const files = fs.readdirSync(dir);
-    files.forEach(function(file) {
+const walkDir = async (dir, fileList, state) =>  {
+    const files = await fs.readdir(dir);
+    for (const file of files) {
         const filePath = path.join(dir, file);
         const fileObj = {
             name: file,
@@ -13,10 +13,12 @@ const walkSync = (dir, fileList, state) =>  {
             children:[]
         };
         try {
-            const stats =  fs.statSync(filePath);
-            if (stats.isDirectory() && !filePath.includes('node_modules')) {
-                fileObj.children = walkSync(filePath, [], state);
-                fileObj.folder = true;
+            const stats = await fs.stat(filePath);
+            if (stats.isDirectory()) {
+                if(!filePath.includes('node_modules')) {
+                    fileObj.children = await walkDir(filePath, [], state);
+                    fileObj.folder = true;
+                }
             }
             fileList.push(fileObj);
         } catch (e) {
@@ -24,12 +26,12 @@ const walkSync = (dir, fileList, state) =>  {
             state.$emit('notify', {message:'Tree build failed', type:'error'});
         }
 
-    });
+    }
     return fileList;
 };
 
-const setFolder = (filePath, state) => {
-    state.fileList = [{name: filePath.split('/').pop(), folder: true, children:walkSync(filePath, [], state)}];
+const setFolder = async (filePath, state) => {
+    state.fileList = [{name: filePath.split('/').pop(), folder: true, children: await walkDir(filePath, [], state)}];
 };
 
 export default {
@@ -38,17 +40,21 @@ export default {
             fileList:[]
         };
     },
+    computed: {
+        items () {
+            return this.fileList;
+        }
+    },
     methods: {
-        openFolder () {
-            dialog.showOpenDialog({
+        async openFolder () {
+            const folderPaths = dialog.showOpenDialog({
                 title:'Select a folder',
                 properties: ['openDirectory']
-            }, (folderPaths) => {
-                if(folderPaths === undefined){
-                    return;
-                }
-                setFolder(folderPaths[0], this);
             });
+            if(folderPaths === undefined){
+                return;
+            }
+            await setFolder(folderPaths[0], this);
         },
         openFile(fileName) {
             this.$emit('open-file', fileName);
