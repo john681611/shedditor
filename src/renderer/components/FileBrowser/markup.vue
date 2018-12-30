@@ -2,23 +2,24 @@
   <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs6>
-          <v-btn  flat v-on:click="openFolder()" open-on-click class='file-button'><v-icon>folder_open</v-icon>Open</v-btn>
+          <v-btn  flat v-on:click="openFolder()" class='file-button'><v-icon>folder_open</v-icon>Open</v-btn>
         </v-flex>
         <v-flex xs6>
-          <v-btn  flat v-on:click="openFile(null)" open-on-click class='file-button'><v-icon>open_in_new</v-icon>New</v-btn>
+          <v-btn  flat v-on:click="openFile(null); close()" class='file-button'><v-icon>open_in_new</v-icon>New</v-btn>
         </v-flex>
      </v-layout>
-    <v-treeview dark :items="items" :load-children="openFolder" expand-icon='' open-on-click class='tree'>
+    <v-divider dark></v-divider>
+    <v-treeview v-model="tree" :items="items" open-on-click activatable item-key="name" >
     <template slot="prepend" slot-scope="{ item, open, leaf }" >
-      <v-icon v-if='item.folder'>
-        {{ open ? 'folder_open' : 'folder' }}
-      </v-icon>
-      <v-btn v-else flat v-on:click='openFile(item.filePath)' class='file-button'>
-        <v-icon>
-          description
+        <v-icon v-if='item.folder'>
+          {{ open ? 'folder_open' : 'folder' }}
         </v-icon>
-        {{item.name}}
-      </v-btn>
+        <v-btn v-else flat v-on:click='openFile(item.filePath)' v-on:dblclick='openFile(item.filePath); close()' class='file-button'>
+          <v-icon>
+            description
+          </v-icon>
+          {{item.name}}
+        </v-btn>
     </template>
     </v-treeview>
     </v-container>

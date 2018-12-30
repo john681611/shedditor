@@ -27,17 +27,25 @@ const walkDir = async (dir, fileList, state) =>  {
         }
 
     }
+    fileList.sort(function(x, y) {
+        const result =  x.folder === y.folder? 0 : x.folder? -1 : 1;
+        if(result === 0 ) {
+            return x.name.localeCompare(y.name);
+        }
+        return result;
+    });
     return fileList;
 };
 
 const setFolder = async (filePath, state) => {
-    state.fileList = [{name: filePath.split('/').pop(), folder: true, children: await walkDir(filePath, [], state)}];
+    state.fileList = await walkDir(filePath, [], state);
 };
 
 export default {
     data () {
         return {
-            fileList:[]
+            fileList:[],
+            tree:[]
         };
     },
     computed: {
@@ -47,6 +55,7 @@ export default {
     },
     methods: {
         async openFolder () {
+            console.trace();
             const folderPaths = dialog.showOpenDialog({
                 title:'Select a folder',
                 properties: ['openDirectory']
@@ -54,10 +63,19 @@ export default {
             if(folderPaths === undefined){
                 return;
             }
+            localStorage.folderPath = folderPaths[0];
             await setFolder(folderPaths[0], this);
         },
         openFile(fileName) {
             this.$emit('open-file', fileName);
+        },
+        close () {
+            this.$emit('close');
+        }
+    },
+    async beforeMount(){
+        if(localStorage.folderPath) {
+            await setFolder(localStorage.folderPath, this);
         }
     }
 };

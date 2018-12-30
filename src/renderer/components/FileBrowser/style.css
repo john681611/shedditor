@@ -1,16 +1,30 @@
 button + .v-treeview-node__label {
   display: none;
 }
+.v-treeview-node__content > button {
+  padding-left: 0;
+}
+
 
  .v-treeview-node,
- .v_treeview-node > .v-treeview-node--leaf {
+ .v_treeview-node > .v-treeview-node--leaf,
+ .v-treeview>.v-treeview-node--leaf {
   margin-left: 10px;
+}
+.v-treeview-node__children >  .v-treeview-node {
+  border-left: 1px solid gray;
+  padding-left: 2px; 
 }
 
 .file-button {
   text-transform: none;
 }
 
-.tree {
-  overflow:scroll;
+.v-treeview {
+  overflow: scroll;
+}
+
+
+aside > .container {
+  overflow: hidden;
 }
