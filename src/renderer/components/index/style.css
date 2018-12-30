@@ -30,4 +30,7 @@ main {
   top: 0;
   right: 0;
 }
+.v-tabs__item {
+  text-transform: none
+}
 
