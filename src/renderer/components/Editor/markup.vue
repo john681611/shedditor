@@ -1,8 +1,9 @@
 <template>
     <dir>
         <div>
-            <v-btn flat v-on:click='saveFile'><v-icon>save</v-icon></v-btn>
-            <v-btn flat v-on:click='refeshFile'><v-icon>refresh</v-icon></v-btn>
+           <v-icon v-on:click='saveFile'>save</v-icon>
+           <v-icon v-on:click='refeshFile'>refresh</v-icon>
+           <v-icon v-on:click='deleteFile'>delete</v-icon>
         </div>
         <monaco-editor
     class="editor"

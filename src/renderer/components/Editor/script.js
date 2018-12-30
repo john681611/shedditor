@@ -38,7 +38,7 @@ export default {
             if(this.originalFile){
                 await fs.unlink(this.originalFile);
             }
-            this.$emit('updateFile',null);
+            this.$emit('updateFile', null);
         },
         async refeshFile() {
             if(this.originalFile){
