@@ -14,7 +14,10 @@ export default {
     components: { FileBrowser, Editor },
     methods: {
         openFile (newFile) {
-            const fileObj = {name: newFile.split('/').pop(), path:newFile};
+            const fileObj = {name: '!new', path:newFile};
+            if(newFile) {
+                fileObj.name = newFile.split('/').pop();
+            }
             const found = this.files.find(file => file.path === newFile);
             if(found) {
                 this.active = this.files.indexOf(found);

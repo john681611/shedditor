@@ -1,5 +1,6 @@
 
 import MonacoEditor from './monaco';
+const {dialog} = require('electron').remote;
 import fileMapping from './fileMapping';
 const fs = require('fs-extra');
 export default {
@@ -14,10 +15,17 @@ export default {
     },
     methods: {
         getFileType(file) {
-            return fileMapping[file.split('.').pop()];
+            if(file) {
+                return fileMapping[file.split('.').pop()];
+            }
+            return null;
         },
         saveFile() {
             const data = new Uint8Array(Buffer.from(this.content));
+            if(!this.originalFile){
+                this.originalFile = dialog.showSaveDialog({title: 'Save File'});
+                this.$emit('updateFile', {name: this.originalFile.split('/').pop(), path:this.originalFile});
+            }
             fs.writeFile(this.originalFile, data, (err) => {
                 if (err) {
                     console.log(err);
@@ -26,9 +34,19 @@ export default {
                 this.$emit('notify', {message:`Saved ${this.originalFile}`, type:'success'});
             });
         },
+        async deleteFile() {
+            if(this.originalFile){
+                await fs.unlink(this.originalFile);
+            }
+            this.$emit('updateFile',null);
+        },
         async refeshFile() {
-            this.content = await fs.readFile(this.originalFile, 'utf8');
-            this.$emit('notify', {message:`Refreshed: ${this.originalFile}`, type:'success'});
+            if(this.originalFile){
+                this.content = await fs.readFile(this.originalFile, 'utf8');
+                this.$emit('notify', {message:`Refreshed: ${this.originalFile}`, type:'success'});
+            } else {
+                this.$emit('notify', {message:'No saved File', type:'error'});
+            }
         },
         close() {
             this.$emit('open-file', null);
@@ -39,7 +57,11 @@ export default {
             immediate: true,
             async handler(newFile) {
                 this.originalFile = newFile;
-                this.content = await fs.readFileSync(newFile, 'utf8');
+                if(newFile) {
+                    this.content = await fs.readFileSync(newFile, 'utf8');
+                } else {
+                    this.content = '';
+                }
             }
         }
     }

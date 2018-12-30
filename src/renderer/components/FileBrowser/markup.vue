@@ -4,6 +4,9 @@
       <v-flex xs6>
           <v-btn  flat v-on:click="openFolder()" open-on-click class='file-button'><v-icon>folder_open</v-icon>Open</v-btn>
         </v-flex>
+        <v-flex xs6>
+          <v-btn  flat v-on:click="openFile(null)" open-on-click class='file-button'><v-icon>open_in_new</v-icon>New</v-btn>
+        </v-flex>
      </v-layout>
     <v-treeview dark :items="items" :load-children="openFolder" expand-icon='' open-on-click class='tree'>
     <template slot="prepend" slot-scope="{ item, open, leaf }" >
