@@ -6,12 +6,11 @@ const path = require('path')
 const { dependencies } = require('../package.json')
 const webpack = require('webpack')
 
-const BabiliWebpackPlugin = require('babili-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
-// const MonocoEditorPlugin = require('monaco-editor-webpack-plugin')
+const MonocoEditorPlugin = require('monaco-editor-webpack-plugin')
 
 /**
  * List of node_modules to include in webpack bundle
@@ -132,12 +131,12 @@ let rendererConfig = {
         removeComments: true
       },
       nodeModules: process.env.NODE_ENV !== 'production'
-        ? path.resolve(__dirname, '../node_modules')
-        : false
+      ? path.resolve(__dirname, '../node_modules')
+      : false
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    // new MonocoEditorPlugin()
+    new MonocoEditorPlugin()
   ],
   output: {
     filename: '[name].js',
@@ -172,7 +171,6 @@ if (process.env.NODE_ENV === 'production') {
   rendererConfig.devtool = ''
 
   rendererConfig.plugins.push(
-    new BabiliWebpackPlugin(),
     new CopyWebpackPlugin([
       {
         from: path.join(__dirname, '../static'),
