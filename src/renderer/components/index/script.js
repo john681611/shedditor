@@ -1,5 +1,5 @@
-import FileBrowser from '../FileBrowser/markup';
-import Editor from '../Editor/markup';
+import FileBrowser from '../FileBrowser/markup.vue';
+import Editor from '../Editor/markup.vue';
 export default {
     data () {
         return {

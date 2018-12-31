@@ -32,7 +32,7 @@
         <h1>Looks like you have nothing open</h1>
         <v-btn v-on:click.stop="drawer = !drawer">TAKE ME TO MY FILES DAMN IT</v-btn>
         <v-btn v-on:click.stop="openFile(null)">I WANNA DO SOMETHING NEW</v-btn>
-        
+        <div id='terminal'></div>
       </dir>
     </main>
   </div>
