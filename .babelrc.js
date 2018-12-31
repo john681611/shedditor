@@ -1,4 +1,3 @@
-const BabelEsmPlugin = require('babel-esm-plugin');
 module.exports = {
   "comments": false,
   "env": {
@@ -8,7 +7,7 @@ module.exports = {
         {
           "useBuiltIns": "entry",
           "targets": {
-            "browsers": ["last 2 versions", "Electron"]
+            "browsers": ["last 2 versions"]
           }
         }]
       ],
@@ -19,7 +18,7 @@ module.exports = {
         {
           "useBuiltIns": "entry",
           "targets": {
-            "browsers": ["last 2 versions", "Electron"]
+            "browsers": ["last 2 versions"]
           }
         }]
       ]
@@ -30,7 +29,7 @@ module.exports = {
         {
           "useBuiltIns": "entry",
           "targets": {
-            "browsers": ["last 2 versions", "Electron"]
+            "browsers": ["last 2 versions"]
           }
         }]
       ],
@@ -42,11 +41,11 @@ module.exports = {
         {
           "useBuiltIns": "entry",
           "targets": {
-            "browsers": ["last 2 versions", "Electron"]
+            "browsers": ["last 2 versions"]
           }
         }]
       ]
     }
   },
-  "plugins": ["transform-runtime",new BabelEsmPlugin()]
+  "plugins": ["transform-runtime"]
 }
