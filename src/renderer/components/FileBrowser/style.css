@@ -22,6 +22,7 @@ button + .v-treeview-node__label {
 
 .v-treeview {
   overflow: scroll;
+  max-height: 90vh
 }
 
 
