@@ -8,6 +8,8 @@
           <v-btn  flat v-on:click="openFile(null); close()" class='file-button'><v-icon>open_in_new</v-icon>New</v-btn>
         </v-flex>
      </v-layout>
+     <v-divider dark></v-divider>
+     <h2>{{folderName}}</h2>
     <v-divider dark></v-divider>
     <v-treeview v-model="tree" :items="items" open-on-click activatable item-key="name" >
     <template slot="prepend" slot-scope="{ item, open, leaf }" >

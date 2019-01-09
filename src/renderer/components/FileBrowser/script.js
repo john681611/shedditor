@@ -38,12 +38,14 @@ const walkDir = async (dir, fileList, state) =>  {
 };
 
 const setFolder = async (filePath, state) => {
+    state.folderName =  filePath.split('/').pop();
     state.fileList = await walkDir(filePath, [], state);
 };
 
 export default {
     data () {
         return {
+            folderName: null,
             fileList:[],
             tree:[]
         };
