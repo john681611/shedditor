@@ -21,6 +21,11 @@
     "unit": "jest",
     "postinstall": "npm run lint:fix"
   },
+"babel": {
+    "presets": [
+      "env"
+    ]
+  },
   "jest": {
     "moduleFileExtensions": [
       "js",
@@ -28,11 +33,11 @@
     ],
     "transform": {
       "^.+\\.js$": "babel-jest",
-      "^.+\\.vue$": "vue-jest"
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
     },
     "transformIgnorePatterns": [
-      "/node_modules/monaco-editor/esm/vs/editor/",
-      "/node_modules/monaco-editor/"
+      "node_modules/(?!monaco-editor/)"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -117,6 +122,7 @@
     "html-webpack-plugin": "^3.2.0",
     "inject-loader": "^4.0.1",
     "jest": "^23.6.0",
+    "jest-css-modules-transform": "^2.1.1",
     "material-design-icons-iconfont": "^4.0.3",
     "mini-css-extract-plugin": "0.5.0",
     "monaco-editor-webpack-plugin": "1.7.0",
