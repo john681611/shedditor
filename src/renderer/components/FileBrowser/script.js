@@ -1,7 +1,7 @@
 const {dialog} = require('electron').remote;
 const fs = require('fs-extra');
 const path = require('path');
-
+const {platform} = require("os");
 
 const walkDir = async (dir, fileList, state) =>  {
     const files = await fs.readdir(dir);
@@ -38,7 +38,7 @@ const walkDir = async (dir, fileList, state) =>  {
 };
 
 const setFolder = async (filePath, state) => {
-    state.folderName =  filePath.split('/').pop();
+    state.folderName = filePath.split((platform() === 'win32'? '\\' : '/')).pop();
     state.fileList = await walkDir(filePath, [], state);
 };
 

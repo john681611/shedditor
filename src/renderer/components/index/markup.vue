@@ -1,5 +1,6 @@
 <template>
   <div id="wrapper">
+    
     <v-toolbar absolute tabs dark>
       <v-icon v-on:click.stop="drawer = !drawer">folder</v-icon>
       <v-toolbar-title>Shedditor</v-toolbar-title>
@@ -8,7 +9,7 @@
       </p>
       <v-tabs v-if='files.length' v-model="active" slot="extension" centered show-arrows>
         <v-tab v-for="(file, index) in files" :key="index" ripple>
-          {{file.name}} <v-icon v-on:click='updateFile(null, index)'>close</v-icon>
+          {{file.name}}<span v-if="file.saveState" class="unsaved"></span> <v-icon v-on:click='updateFile(null, index)'>close</v-icon>
         </v-tab>
       </v-tabs>
     </v-toolbar>
@@ -25,7 +26,7 @@
     </v-snackbar>
     <v-tabs-items v-if='files.length' v-model="active">
           <v-tab-item v-for="(file, index) in files" :key="index">
-            <editor :open-file='file.path' v-on:notify="notify" v-on:updateFile="updateFile($event, index)"></editor>
+            <editor :open-file='file.path' v-on:notify="notify" v-on:saveState="file.saveState = $event" v-on:updateFile="updateFile($event, index)"></editor>
           </v-tab-item>
         </v-tabs-items>
       <dir v-else class='center'>

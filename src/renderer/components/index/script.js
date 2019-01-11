@@ -1,5 +1,6 @@
 import FileBrowser from '../FileBrowser/markup.vue';
 import Editor from '../Editor/markup.vue';
+const {platform} = require('os');
 export default {
     data () {
         return {
@@ -16,7 +17,7 @@ export default {
         openFile (newFile) {
             const fileObj = {name: 'Mr No-name.null', path:newFile};
             if(newFile) {
-                fileObj.name = newFile.split('/').pop();
+                fileObj.name = newFile.split((platform() === 'win32'? '\\' : '/')).pop();
             }
             const found = this.files.find(file => file.path === newFile);
             if(found) {
