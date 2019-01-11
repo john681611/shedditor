@@ -77,6 +77,7 @@ export default {
             }
         },
         content: {
+            immediate: true,
             handler(newContent) {
                 if(this.originalcontent !== newContent) {
                     this.$emit('saveState', true);

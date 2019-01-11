@@ -57,7 +57,6 @@ export default {
     },
     methods: {
         async openFolder () {
-            console.trace();
             const folderPaths = dialog.showOpenDialog({
                 title:'Select a folder',
                 properties: ['openDirectory']
@@ -73,6 +72,9 @@ export default {
         },
         close () {
             this.$emit('close');
+        },
+        async refreshFile () {
+            this.fileList = await walkDir(localStorage.folderPath, [], this);
         }
     },
     async beforeMount(){

@@ -21,10 +21,11 @@
     "unit": "jest",
     "postinstall": "npm run lint:fix"
   },
-"babel": {
+  "babel": {
     "presets": [
       "env"
-    ]
+    ],
+     "plugins": ["transform-runtime"]
   },
   "jest": {
     "moduleFileExtensions": [

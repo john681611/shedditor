@@ -1,11 +1,14 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs6>
+      <v-flex xs4>
           <v-btn  flat v-on:click="openFolder()" class='file-button'><v-icon>folder_open</v-icon>Open</v-btn>
         </v-flex>
-        <v-flex xs6>
+        <v-flex xs4>
           <v-btn  flat v-on:click="openFile(null); close()" class='file-button'><v-icon>open_in_new</v-icon>New</v-btn>
+        </v-flex>
+        <v-flex xs4>
+          <v-btn  flat v-on:click="refreshFile();" class='file-button'><v-icon>refresh</v-icon></v-btn>
         </v-flex>
      </v-layout>
      <v-divider dark></v-divider>
