@@ -26,7 +26,7 @@
     </v-snackbar>
     <v-tabs-items v-if='files.length' v-model="active">
           <v-tab-item v-for="(file, index) in files" :key="index">
-            <editor :open-file='file.path' v-on:notify="notify" v-on:saveState="file.saveState = $event" v-on:updateFile="updateFile($event, index)"></editor>
+            <editor :open-file='file.path' v-on:notify="notify" v-on:saveState="updateState($event, index)" v-on:updateFile="updateFile($event, index)"></editor>
           </v-tab-item>
         </v-tabs-items>
       <dir v-else class='center'>

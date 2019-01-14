@@ -37,6 +37,9 @@ export default {
         notify(notification) {
             this.note = notification;
             this.showNote = true;
+        },
+        updateState(event, index) {
+            this.files[index].saveState = event;
         }
     },
     watch: {

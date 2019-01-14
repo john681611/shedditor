@@ -70,7 +70,7 @@ export default {
             async handler(newFile) {
                 this.originalFile = newFile;
                 if(newFile) {
-                   await setContent(this.originalFile, this);
+                    await setContent(this.originalFile, this);
                 } else {
                     this.content = '';
                 }
@@ -79,10 +79,7 @@ export default {
         content: {
             immediate: true,
             handler(newContent) {
-                if(this.originalcontent !== newContent) {
-                    this.$emit('saveState', true);
-                }
-
+                this.$emit('saveState', this.originalcontent !== newContent);
             }
         }
     }
