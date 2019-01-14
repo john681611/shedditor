@@ -1,13 +1,12 @@
-const Vue  = require('vue');
+const { mount } = require('@vue/test-utils');
 const component = require('./markup.vue');
 
 describe('LandingPage.vue', () => {
     it('should render correct contents', () => {
-        const vm = new Vue({
-            el: document.createElement('div'),
-            render: h => h(component)
-        }).$mount();
-
-        expect(vm.$el.querySelector('.title').textContent).to.contain('Welcome to your new project!');
+        const wrapper = mount(component);
+        const title = wrapper.find('.center > h1');
+        expect(wrapper.html()).toBe(true);
+        // expect(title.textContent).toContain('Welcome to your new project!');
     });
 });
+
